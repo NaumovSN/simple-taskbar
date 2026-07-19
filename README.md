@@ -96,14 +96,7 @@ The settings provide control over:
 - Workspace switching by scrolling over empty panel space.
 - Notification banners that follow the panel edge and clock alignment.
 - Click-only switching between open panel menus.
-- An optional folder button for quickly opening files from a chosen directory.
 - A configurable Task Manager entry in the empty-panel context menu.
-
-<p align="center">
-  <img src="docs/images/folder-menu-demo.gif" alt="Opening the custom folder menu and selecting one of its files" width="370">
-</p>
-
-<p align="center"><sub>Open files quickly from the optional custom folder menu.</sub></p>
 
 Activities can be shown or hidden independently. A custom Start button icon can
 also be selected.
@@ -119,6 +112,17 @@ also be selected.
 </p>
 
 <p align="center"><sub>Behaviour, panel item and reset controls.</sub></p>
+
+### Optional folder menu
+
+Add a folder button to the panel for quickly opening files from a selected
+directory with their default applications.
+
+<p align="center">
+  <img src="docs/images/folder-menu-demo.gif" alt="Opening the custom folder menu and selecting one of its files" width="370">
+</p>
+
+<p align="center"><sub>Open files quickly from the optional custom folder menu.</sub></p>
 
 ## Eleven-style Start Menu
 
