@@ -99,7 +99,11 @@ The settings provide control over:
 - An optional folder button for quickly opening files from a chosen directory.
 - A configurable Task Manager entry in the empty-panel context menu.
 
-[▶ Watch the folder menu in action (WebM, 4 seconds)](docs/videos/folder-menu-demo.webm)
+<p align="center">
+  <img src="docs/images/folder-menu-demo.gif" alt="Opening the custom folder menu and selecting one of its files" width="370">
+</p>
+
+<p align="center"><sub>Open files quickly from the optional custom folder menu.</sub></p>
 
 Activities can be shown or hidden independently. A custom Start button icon can
 also be selected.
