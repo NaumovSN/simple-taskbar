@@ -407,6 +407,11 @@ class SecondaryTaskbarPanel {
         this._connect(this._settings, 'changed::start-button-position', () => {
             this._applyLayout();
         });
+        this._connect(
+            this._settings,
+            'changed::start-button-follow-app-alignment',
+            () => this._applyLayout()
+        );
         this._connect(this._settings, 'changed::activities-button-visible', () => {
             this._syncActivitiesVisibility();
             this._updateTaskbarWidth();
@@ -474,10 +479,9 @@ class SecondaryTaskbarPanel {
         ])
             actor?.get_parent()?.remove_child(actor);
 
-        const startBox =
-            this._settings.get_string('start-button-position') === 'center'
-                ? this._centerBox
-                : this._leftBox;
+        const startBox = this._startButtonIsCentered()
+            ? this._centerBox
+            : this._leftBox;
         const taskbarBox = this._appsAreCentered()
             ? this._centerBox
             : this._leftBox;
@@ -509,6 +513,14 @@ class SecondaryTaskbarPanel {
 
     _appsAreCentered() {
         return this._settings.get_string('app-alignment') === 'center';
+    }
+
+    _startButtonIsCentered() {
+        return this._settings.get_boolean(
+            'start-button-follow-app-alignment'
+        )
+            ? this._appsAreCentered()
+            : this._settings.get_string('start-button-position') === 'center';
     }
 
     _position() {

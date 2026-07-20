@@ -493,6 +493,29 @@ export default class SimpleTaskbarPreferences extends ExtensionPreferences {
             choices: panelPositions.slice(0, 2),
         });
 
+        const followAppAlignmentSwitch = new Adw.SwitchRow({
+            title: _('Follow Application Alignment'),
+            subtitle: _('Move the Start button with the application buttons'),
+            active: window._settings.get_boolean(
+                'start-button-follow-app-alignment'
+            ),
+        });
+        startButtonGroup.add(followAppAlignmentSwitch);
+        window._settings.bind(
+            'start-button-follow-app-alignment',
+            followAppAlignmentSwitch,
+            'active',
+            Gio.SettingsBindFlags.DEFAULT
+        );
+        const updateStartPositionRow = () => {
+            startPositionRow.sensitive = !followAppAlignmentSwitch.active;
+        };
+        followAppAlignmentSwitch.connect(
+            'notify::active',
+            updateStartPositionRow
+        );
+        updateStartPositionRow();
+
         this._addSpinRow(startButtonGroup, window._settings, {
             key: 'start-button-padding',
             title: _('Start Button Padding'),
@@ -637,12 +660,22 @@ export default class SimpleTaskbarPreferences extends ExtensionPreferences {
         );
 
         const updateCenterStartMenuRow = () => {
-            const centered = window._settings.get_string('start-button-position') ===
-                'center';
+            const centered = followAppAlignmentSwitch.active
+                ? window._settings.get_string('app-alignment') === 'center'
+                : window._settings.get_string('start-button-position') ===
+                    'center';
             centerStartMenuRow.sensitive =
                 windowsStartMenuSwitch.active && centered;
         };
         startPositionRow.connect('notify::selected', updateCenterStartMenuRow);
+        followAppAlignmentSwitch.connect(
+            'notify::active',
+            updateCenterStartMenuRow
+        );
+        window._settings.connect(
+            'changed::app-alignment',
+            updateCenterStartMenuRow
+        );
         windowsStartMenuSwitch.connect(
             'notify::active',
             updateCenterStartMenuRow

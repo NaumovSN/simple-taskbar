@@ -245,7 +245,7 @@ export class WindowsStartMenu {
     _getPositionSource() {
         const centerOnMonitor =
             this._settings.get_boolean('start-menu-monitor-centered') &&
-            this._settings.get_string('start-button-position') === 'center';
+            this._startButtonIsCentered();
         const monitor = this._getSourceMonitor();
         if (!centerOnMonitor || !monitor || !this._centerAnchor)
             return this._sourceActor;
@@ -256,6 +256,14 @@ export class WindowsStartMenu {
             Math.round(sourceY)
         );
         return this._centerAnchor;
+    }
+
+    _startButtonIsCentered() {
+        return this._settings.get_boolean(
+            'start-button-follow-app-alignment'
+        )
+            ? this._settings.get_string('app-alignment') === 'center'
+            : this._settings.get_string('start-button-position') === 'center';
     }
 
     _syncShellButtonClasses(actor) {

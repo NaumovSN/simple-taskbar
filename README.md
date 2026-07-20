@@ -24,7 +24,7 @@ those Shell components.
 - Preview open windows by hovering over an application.
 - Use the taskbar on every monitor.
 - Place the panel at the top or bottom of the screen.
-- Align applications and the Start button to the left or center.
+- Align applications and the Start button to the left or center, independently or together.
 - Move the clock and Quick Settings between the left, center and right.
 - Adjust panel height, icon size, spacing, transparency and colour scheme.
 - Use auto-hide, workspace scrolling and current-workspace isolation.

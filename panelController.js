@@ -159,10 +159,9 @@ export class PanelController {
             actor.get_parent()?.remove_child(actor);
 
         const taskbarBox = this.appsAreCentered() ? centerBox : leftBox;
-        const startButtonBox =
-            this._settings.get_string('start-button-position') === 'center'
-                ? centerBox
-                : leftBox;
+        const startButtonBox = this._startButtonIsCentered()
+            ? centerBox
+            : leftBox;
         if (!this._settings.get_boolean('default-gnome-panel')) {
             if (startButtonBox === leftBox)
                 leftBox.insert_child_at_index(this._startButton, 0);
@@ -237,6 +236,14 @@ export class PanelController {
 
     appsAreCentered() {
         return this._settings.get_string('app-alignment') === 'center';
+    }
+
+    _startButtonIsCentered() {
+        return this._settings.get_boolean(
+            'start-button-follow-app-alignment'
+        )
+            ? this.appsAreCentered()
+            : this._settings.get_string('start-button-position') === 'center';
     }
 
     destroy() {
@@ -468,6 +475,11 @@ export class PanelController {
         this._connect(this._settings, 'changed::start-button-position', () => {
             this.applyLayout();
         });
+        this._connect(
+            this._settings,
+            'changed::start-button-follow-app-alignment',
+            () => this.applyLayout()
+        );
         this._connect(this._settings, 'changed::activities-button-visible', () => {
             this._syncActivitiesVisibility();
             this.updateTaskbarWidth();

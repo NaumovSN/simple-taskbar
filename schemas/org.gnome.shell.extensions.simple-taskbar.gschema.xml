@@ -136,6 +136,10 @@
       <default>'center'</default>
       <summary>Start button position</summary>
     </key>
+    <key name="start-button-follow-app-alignment" type="b">
+      <default>true</default>
+      <summary>Move the Start button with the application button alignment</summary>
+    </key>
     <key name="start-button-padding" type="i">
       <range min="0" max="20"/>
       <default>4</default>
