@@ -47,7 +47,13 @@ export class WindowController {
         const windows = this.getInterestingWindows(app);
         const overviewShown = Main.overview._shown ?? Main.overview.visible;
         if (windows.length === 0) {
-            app.activate();
+            const runningOutsideWorkspace =
+                this._settings?.get_boolean('isolate-workspaces') &&
+                app.get_windows().some(window => !window.skip_taskbar);
+            if (runningOutsideWorkspace && app.can_open_new_window())
+                app.open_new_window(-1);
+            else
+                app.activate();
             if (overviewShown)
                 Main.overview.hide();
             return;
