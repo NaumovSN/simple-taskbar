@@ -109,7 +109,7 @@
       <summary>Choose when windows from the same application are combined</summary>
     </key>
     <key name="hide-app-labels" type="b">
-      <default>true</default>
+      <default>false</default>
       <summary>Hide window title labels when application buttons are not combined</summary>
     </key>
     <key name="isolate-workspaces" type="b">
